@@ -19,5 +19,25 @@ Based on these three different API consumer types, there are three different typ
 
 One important point to note is that there is no difference in terms of the implementation of the API for these three types. The difference is in how these APIs are managed.
 
+### SOAP vs REST vs On-Premise (on-prem)
+SOAP (Simple Object Access Protocol) and REST (Representational State Transfer) are two distinct approaches for building web services that enable communication between different systems.
 
+SOAP API:
+------------------------------------------------------------------------------------------------
+**Protocol-based**: SOAP is a formal, XML-based messaging protocol with strict standards and a defined structure.  
+**Strictness**: It requires specific XML message formats (envelopes) and relies on WSDL (Web Services Description Language) for service description.  
+**Security**: Offers built-in security features like WS-Security, in addition to supporting SSL/TLS.  
+**Use Cases**: Often favored in enterprise environments requiring high security, transactional integrity, and complex business logic, such as banking or financial services.  
 
+REST API:
+------------------------------------------------------------------------------------------------
+**Architectural Style**: REST is an architectural style that leverages standard HTTP methods (GET, POST, PUT, DELETE) for stateless communication.  
+**Flexibility**: It is more flexible and lightweight, commonly using JSON or XML for data exchange.  
+**Ease of Use**: Generally easier to implement and consume due to its reliance on standard web technologies.  
+**Use Cases**: Widely adopted for web services, mobile applications, and public APIs where simplicity, scalability, and performance are key.  
+
+On-Premise (Premise)
+------------------------------------------------------------------------------------------------
+The term "on-premise" (or "on-premise deployment") refers to software or infrastructure that is installed and run locally on a company's own servers and within its own data center, rather than being hosted by a third-party cloud provider.  
+**Relation to APIs**: When discussing APIs, "on-premise" signifies that the API's underlying application and data reside within the company's private infrastructure. This contrasts with cloud-based APIs, where the service is hosted and managed by a cloud provider.  
+**Implications**: On-premise deployments offer greater control over data security and compliance but require significant upfront investment in hardware, software licenses, and ongoing maintenance by the organization.  
