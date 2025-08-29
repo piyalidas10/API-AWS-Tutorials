@@ -1,0 +1,35 @@
+
+Disclaimer: We need EC2 t2.large for SonarQube instance to run smoothly
+
+1) Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+2) Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update -y
+
+3) Install latest Docker version using: 
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+
+4) Download SonarQube image using docker:
+sudo docker pull sonarqube:9.9-community
+
+5) Run SonarQube image:
+sudo docker run -d --name sonarqube -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true -p 9000:9000 sonarqube:9.9-community
+
+where 
+
+-d: Runs the container in the background.
+--name sonarqube: Sets the name of the container to sonarqube.
+-e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true: Disables the Elasticsearch bootstrap checks to prevent SonarQube from failing to start.
+-p 9000:9000: Maps port 9000 on the EC2 instance to port 9000 in the container.
+sonarqube:9.9-community: Uses the sonarqube:9.9-community image to create the container.
+
+6) Edit Security Group settings of the EC2 instance and enable TCP port 9000
