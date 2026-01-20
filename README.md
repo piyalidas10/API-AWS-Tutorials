@@ -67,6 +67,7 @@ Attacker injects malicious input that alters database queries.
 **Prevention** : Parameterized queries, ORM / Query builders, Input validation  
   -  Prevents unauthorized commands sent by malicious sites on behalf of an authenticated user.
   -  Often mitigated using tokens or SameSite cookies.
+
 > Real scenario : Login API builds SQL with string concatenation. Attacker logs in without password
 > Best practices : ✅ Never trust user input ✅ Use prepared statements ✅ Least-privilege DB users
 
