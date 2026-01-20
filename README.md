@@ -56,8 +56,11 @@ SQL Injection Prevention
 ![SQL](https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/sql_nosql.png)
 
 > Key headers : Access-Control-Allow-Origin, Access-Control-Allow-Credentials, Access-Control-Allow-Methods
+
 > Real attack scenario : User logged into bank.com. Attacker site evil.com tries to call bank API using cookies. CORS blocks the request in the browser.
+
 > ❌ Never use: Access-Control-Allow-Origin: *
+
 > with credentials : ✅ Allow only trusted domains ✅ Use preflight validation (OPTIONS)
 
 CSRF Protection
@@ -69,6 +72,7 @@ Attacker injects malicious input that alters database queries.
   -  Often mitigated using tokens or SameSite cookies.
 
 > Real scenario : Login API builds SQL with string concatenation. Attacker logs in without password
+
 > Best practices : ✅ Never trust user input ✅ Use prepared statements ✅ Least-privilege DB users
 
 ![CSRF](https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/csrf.png)
@@ -82,6 +86,7 @@ XSS (Cross-Site Scripting) is injecting malicious JavaScript into trusted websit
 ![XSS](https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/xss.png)
 
 > Types : Network firewall (IP, ports) | Web Application Firewall (WAF) – API-aware
+
 > Real scenario : Attacker sends XSS payload in query param | WAF blocks request before backend
 
 Firewalls & Traffic Filtering
