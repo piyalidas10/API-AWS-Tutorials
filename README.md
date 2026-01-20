@@ -13,7 +13,8 @@ Rate Limiting
   -  🚀 Performance & stability: Avoids overload and cascading failures.
   -  💰 Cost control: Limits excessive usage of paid resources (DB, 3rd-party APIs).
 
-<img src="[https://github.com/favicon.ico](https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/Rate_limiting.png)" width="500">
+<img src="https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/Rate_limiting.png" width="500">
+
 ![Rate Limiting](https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/Rate_limiting.png)
 
 Rate limiting protects APIs from abuse and ensures system stability by controlling request frequency. It’s best enforced at the API gateway using algorithms like token bucket or sliding window, often backed by Redis for distributed consistency. Clients exceeding limits receive HTTP 429 responses with retry metadata.
