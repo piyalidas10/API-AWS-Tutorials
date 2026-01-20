@@ -2,8 +2,10 @@
 
 <details>
 <summary><strong>API Security</strong></summary>
-  
-**1. Rate Limiting**
+[![API Security Explained: Rate Limiting, CORS, SQL Injection, CSRF, XSS & More]](https://www.youtube.com/watch?v=FsB_nRGdeLs)
+
+Rate Limiting
+---------------------------------------------------------------------
   -  Controls how often a user or client can call your API.
   -  Helps prevent brute-force attacks and API abuse by limiting requests per IP or user.
   -  🛡️ Security: Prevents brute-force attacks, credential stuffing, and DoS.
@@ -11,18 +13,71 @@
   -  🚀 Performance & stability: Avoids overload and cascading failures.
   -  💰 Cost control: Limits excessive usage of paid resources (DB, 3rd-party APIs).
 
+![Rate Limiting](https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/Rate_limiting.png)
+
 Rate limiting protects APIs from abuse and ensures system stability by controlling request frequency. It’s best enforced at the API gateway using algorithms like token bucket or sliding window, often backed by Redis for distributed consistency. Clients exceeding limits receive HTTP 429 responses with retry metadata.
 
-**Where Rate Limiting Is Implemented**
-🔹 API Gateway (Recommended) : NGINX, Kong, AWS API Gateway, Azure API Management, Cloudflare
-➡️ Centralized, language-agnostic, scalable
+**Where Rate Limiting Is Implemented**  
+🔹 API Gateway (Recommended) : NGINX, Kong, AWS API Gateway, Azure API Management, Cloudflare  
+➡️ Centralized, language-agnostic, scalable  
 
-🔹 Backend Application : Express / NestJS middleware, Spring Boot filters, .NET middleware
-➡️ Good for fine-grained, user-aware limits
+🔹 Backend Application : Express / NestJS middleware, Spring Boot filters, .NET middleware  
+➡️ Good for fine-grained, user-aware limits  
 
-🔹 Distributed Cache : Redis (most common), Memcached
-➡️ Required for horizontal scaling
+🔹 Distributed Cache : Redis (most common), Memcached  
+➡️ Required for horizontal scaling  
 
+**Rate Limiting Dimensions**  
+You can limit by: , IP address, User ID, API key, JWT claims (role, plan), Endpoint, Tenant / Organization
+  -  Free user: 100 req/min
+  -  Premium user: 1000 req/min
+  -  Admin: unlimited
+
+**HTTP Response When Limit Exceeded**
+```
+HTTP/1.1 429 Too Many Requests
+Retry-After: 30
+X-RateLimit-Limit: 100
+X-RateLimit-Remaining: 0
+X-RateLimit-Reset: 1700000000
+```
+
+CORS (Cross-Origin Resource Sharing)
+---------------------------------------------------------------------
+  -  Restricts which websites can make requests to your API.
+  -  Critical for preventing unauthorized domains from accessing API endpoints.
+![CORS](https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/cors.png)
+
+
+SQL Injection Prevention
+---------------------------------------------------------------------
+  -  Techniques to stop attackers from injecting malicious SQL code.
+  -  Use parameterized queries or ORM tools to safely interact with databases.
+![SQL](https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/sql_nosql.png)
+
+
+CSRF Protection
+---------------------------------------------------------------------
+  -  Prevents unauthorized commands sent by malicious sites on behalf of an authenticated user.
+  -  Often mitigated using tokens or SameSite cookies.
+
+![CSRF](https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/csrf.png)
+
+XSS (Cross-Site Scripting) Defense
+---------------------------------------------------------------------
+  -  Ensures your API isn’t exploited to deliver harmful scripts to users.
+  -  Sanitize user input and escape output where needed.
+![XSS](https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/xss.png)
+
+Firewalls & Traffic Filtering
+---------------------------------------------------------------------
+  -  Implements network-level defenses to block suspicious or malformed requests.
+![Firewalls](https://github.com/piyalidas10/API-AWS-Tutorials/blob/200b60a3268211d54726f9ee7d85ac3068d905ba/img/firewall.png)
+
+VPN / Private API Access
+---------------------------------------------------------------------
+  -  Restricts access to internal APIs using network isolation, VPNs, or private endpoints
+![VPN](https://github.com/piyalidas10/API-AWS-Tutorials/blob/200b60a3268211d54726f9ee7d85ac3068d905ba/img/vpn.png)
 
 
 </details>
