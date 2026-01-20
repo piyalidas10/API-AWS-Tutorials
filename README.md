@@ -1,6 +1,33 @@
 # API-Tutorials
 
 <details>
+<summary><strong>API Security</strong></summary>
+  
+**1. Rate Limiting**
+  -  Controls how often a user or client can call your API.
+  -  Helps prevent brute-force attacks and API abuse by limiting requests per IP or user.
+  -  🛡️ Security: Prevents brute-force attacks, credential stuffing, and DoS.
+  -  ⚖️ Fair usage: Stops one client from starving others.
+  -  🚀 Performance & stability: Avoids overload and cascading failures.
+  -  💰 Cost control: Limits excessive usage of paid resources (DB, 3rd-party APIs).
+
+Rate limiting protects APIs from abuse and ensures system stability by controlling request frequency. It’s best enforced at the API gateway using algorithms like token bucket or sliding window, often backed by Redis for distributed consistency. Clients exceeding limits receive HTTP 429 responses with retry metadata.
+
+**Where Rate Limiting Is Implemented**
+🔹 API Gateway (Recommended) : NGINX, Kong, AWS API Gateway, Azure API Management, Cloudflare
+➡️ Centralized, language-agnostic, scalable
+
+🔹 Backend Application : Express / NestJS middleware, Spring Boot filters, .NET middleware
+➡️ Good for fine-grained, user-aware limits
+
+🔹 Distributed Cache : Redis (most common), Memcached
+➡️ Required for horizontal scaling
+
+
+
+</details>
+
+<details>
 <summary><strong>API provider</strong></summary>
 An API provider is an organization that exposes APIs. An API provider, also known as an API service provider, is an entity (individual or organization) that creates, manages, and offers Application Programming Interfaces (APIs) for use by other developers, businesses, or applications.
 
