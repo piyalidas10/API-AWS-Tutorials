@@ -7,8 +7,8 @@
 Rate Limiting
 ---------------------------------------------------------------------
   -  Controls how often a user or client can call your API.
-  -  Helps prevent brute-force attacks and API abuse by limiting requests per IP or user.
-  -  🛡️ Security: Prevents brute-force attacks, credential stuffing, and DoS.
+  -  Helps prevent brute-force attacks (login, OTP) and API abuse by limiting requests per IP or user.
+  -  🛡️ Security: Prevents brute-force attacks (login, OTP), credential stuffing, and DoS.
   -  ⚖️ Fair usage: Stops one client from starving others.
   -  🚀 Performance & stability: Avoids overload and cascading failures.
   -  💰 Cost control: Limits excessive usage of paid resources (DB, 3rd-party APIs).
@@ -55,30 +55,51 @@ SQL Injection Prevention
   -  Use parameterized queries or ORM tools to safely interact with databases.
 ![SQL](https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/sql_nosql.png)
 
+> Key headers : Access-Control-Allow-Origin, Access-Control-Allow-Credentials, Access-Control-Allow-Methods
+> Real attack scenario : User logged into bank.com. Attacker site evil.com tries to call bank API using cookies. CORS blocks the request in the browser.
+> ❌ Never use: Access-Control-Allow-Origin: *
+> with credentials : ✅ Allow only trusted domains ✅ Use preflight validation (OPTIONS)
 
 CSRF Protection
 ---------------------------------------------------------------------
+Attacker injects malicious input that alters database queries.   
+**Can lead to**: Data leakage, Data deletion, Admin access   
+**Prevention** : Parameterized queries, ORM / Query builders, Input validation  
   -  Prevents unauthorized commands sent by malicious sites on behalf of an authenticated user.
   -  Often mitigated using tokens or SameSite cookies.
+> Real scenario : Login API builds SQL with string concatenation. Attacker logs in without password
+> Best practices : ✅ Never trust user input ✅ Use prepared statements ✅ Least-privilege DB users
 
 ![CSRF](https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/csrf.png)
 
 XSS (Cross-Site Scripting) Defense
 ---------------------------------------------------------------------
+XSS (Cross-Site Scripting) is injecting malicious JavaScript into trusted websites.  
+**Allows**: Token theft | Session hijacking | UI manipulation  
+**Types** : Stored XSS | Reflected XSS | DOM-based XSS  
   -  Ensures your API isn’t exploited to deliver harmful scripts to users.
-  -  Sanitize user input and escape output where needed.
 ![XSS](https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/xss.png)
+
+> Types : Network firewall (IP, ports) | Web Application Firewall (WAF) – API-aware
+> Real scenario : Attacker sends XSS payload in query param | WAF blocks request before backend
 
 Firewalls & Traffic Filtering
 ---------------------------------------------------------------------
-  -  Implements network-level defenses to block suspicious or malformed requests.
+Filters traffic before it reaches your API.
+  -  Blocks: Known attack patterns, Malformed requests, Bot traffic
+  -  Types : Network firewall (IP, ports) | Web Application Firewall (WAF) – API-aware
+  -  Real scenario : Attacker sends XSS payload in query param. WAF blocks request before backend
 ![Firewalls](https://github.com/piyalidas10/API-AWS-Tutorials/blob/200b60a3268211d54726f9ee7d85ac3068d905ba/img/firewall.png)
 
 VPN / Private API Access
 ---------------------------------------------------------------------
+Restricting APIs to private networks. Even if credentials leak, APIs remain unreachable.
+**Common setups** : Corporate VPN, VPC-internal APIs, Zero-trust networks  
+> Real scenario : Internal admin API accidentally exposed | Attackers scan & exploit | VPN would make it unreachable.
   -  Restricts access to internal APIs using network isolation, VPNs, or private endpoints
 ![VPN](https://github.com/piyalidas10/API-AWS-Tutorials/blob/200b60a3268211d54726f9ee7d85ac3068d905ba/img/vpn.png)
 
+Best practices : ✅ Public APIs only when required ✅ Internal APIs → private network only ✅ Combine with IAM
 
 </details>
 
