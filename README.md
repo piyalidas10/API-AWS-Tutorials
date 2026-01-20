@@ -15,8 +15,6 @@ Rate Limiting
 
 <img src="https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/Rate_limiting.png" width="500">
 
-![Rate Limiting](https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/Rate_limiting.png)
-
 Rate limiting protects APIs from abuse and ensures system stability by controlling request frequency. It’s best enforced at the API gateway using algorithms like token bucket or sliding window, often backed by Redis for distributed consistency. Clients exceeding limits receive HTTP 429 responses with retry metadata.
 
 **Where Rate Limiting Is Implemented**  
@@ -48,14 +46,13 @@ CORS (Cross-Origin Resource Sharing)
 ---------------------------------------------------------------------
   -  Restricts which websites can make requests to your API.
   -  Critical for preventing unauthorized domains from accessing API endpoints.
-![CORS](https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/cors.png)
-
+<img src="https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/cors.png" width="500">
 
 SQL Injection Prevention
 ---------------------------------------------------------------------
   -  Techniques to stop attackers from injecting malicious SQL code.
   -  Use parameterized queries or ORM tools to safely interact with databases.
-![SQL](https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/sql_nosql.png)
+<img src="https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/sql_nosql.png" width="500">
 
 > Key headers : Access-Control-Allow-Origin, Access-Control-Allow-Credentials, Access-Control-Allow-Methods
 
@@ -77,7 +74,7 @@ Attacker injects malicious input that alters database queries.
 
 > Best practices : ✅ Never trust user input ✅ Use prepared statements ✅ Least-privilege DB users
 
-![CSRF](https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/csrf.png)
+<img src="https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/csrf.png" width="500">
 
 XSS (Cross-Site Scripting) Defense
 ---------------------------------------------------------------------
@@ -85,7 +82,7 @@ XSS (Cross-Site Scripting) is injecting malicious JavaScript into trusted websit
 **Allows**: Token theft | Session hijacking | UI manipulation  
 **Types** : Stored XSS | Reflected XSS | DOM-based XSS  
   -  Ensures your API isn’t exploited to deliver harmful scripts to users.
-![XSS](https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/xss.png)
+<img src="https://github.com/piyalidas10/API-AWS-Tutorials/blob/75f1a37001be9102258c7bfa052ef22f931655f2/img/xss.png" width="500">
 
 > Types : Network firewall (IP, ports) | Web Application Firewall (WAF) – API-aware
 
@@ -97,7 +94,7 @@ Filters traffic before it reaches your API.
   -  Blocks: Known attack patterns, Malformed requests, Bot traffic
   -  Types : Network firewall (IP, ports) | Web Application Firewall (WAF) – API-aware
   -  Real scenario : Attacker sends XSS payload in query param. WAF blocks request before backend
-![Firewalls](https://github.com/piyalidas10/API-AWS-Tutorials/blob/200b60a3268211d54726f9ee7d85ac3068d905ba/img/firewall.png)
+<img src="https://github.com/piyalidas10/API-AWS-Tutorials/blob/200b60a3268211d54726f9ee7d85ac3068d905ba/img/firewall.png" width="500">
 
 VPN / Private API Access
 ---------------------------------------------------------------------
@@ -105,7 +102,7 @@ Restricting APIs to private networks. Even if credentials leak, APIs remain unre
 **Common setups** : Corporate VPN, VPC-internal APIs, Zero-trust networks  
 > Real scenario : Internal admin API accidentally exposed | Attackers scan & exploit | VPN would make it unreachable.
   -  Restricts access to internal APIs using network isolation, VPNs, or private endpoints
-![VPN](https://github.com/piyalidas10/API-AWS-Tutorials/blob/200b60a3268211d54726f9ee7d85ac3068d905ba/img/vpn.png)
+<img src="https://github.com/piyalidas10/API-AWS-Tutorials/blob/200b60a3268211d54726f9ee7d85ac3068d905ba/img/vpn.png" width="500">
 
 Best practices : ✅ Public APIs only when required ✅ Internal APIs → private network only ✅ Combine with IAM
 
