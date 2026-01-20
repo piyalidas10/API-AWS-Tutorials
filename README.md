@@ -1,6 +1,7 @@
 # API-Tutorials
 
-## API provider
+<details>
+<summary><strong>API provider</strong></summary>
 An API provider is an organization that exposes APIs. An API provider, also known as an API service provider, is an entity (individual or organization) that creates, manages, and offers Application Programming Interfaces (APIs) for use by other developers, businesses, or applications.
 
 **Examples of API providers include:**  
@@ -8,13 +9,17 @@ An API provider is an organization that exposes APIs. An API provider, also know
 **Cloud service providers**: Amazon Web Services (AWS), Google Cloud Platform, Microsoft Azure, which offer a wide range of APIs for various cloud services.  
 **Communication platforms**: Twilio (for messaging and voice APIs), SendGrid (for email APIs).  
 **Payment gateways**: Stripe (for online payment processing APIs).  
-**Social media platforms**: Facebook, Twitter, Instagram, which provide APIs for accessing their platform data and functionalities.  
+**Social media platforms**: Facebook, Twitter, Instagram, which provide APIs for accessing their platform data and functionalities. 
+</details>
 
-## API Consumers
+<details>
+<summary><strong>API Consumers</strong></summary>
 Consumers are the entities that consume these APIs.  
 There are three different types of API consumers. 1) The first type of consumer is the private or internal consumer. These consumers are part of the same organization that is building and exposing the APIs. 2) Second type is the public or external API consumer. These are outside of the provider organization. 3) The third type is the partner API consumer. These consumers are trusted by the API provider.  
+</details>
 
-## Types of API
+<details>
+<summary><strong>Types of API</strong></summary>
 Based on these three different API consumer types, there are three different types of APIs. 1) The **private or the internal APIs** are used only by the development teams within the provider's organization. 2) The **public or the external APIs** are meant to be consumed by the public domain application developers. These public domain application developers consume the APIs from their applications and websites. 3) **Partner APIs** are used only by the trusted partners of the provider's organization. 
 
 One important point to note is that there is no difference in terms of the implementation of the API for these three types. The difference is in how these APIs are managed.
@@ -41,3 +46,4 @@ On-Premise (Premise)
 The term "on-premise" (or "on-premise deployment") refers to software or infrastructure that is installed and run locally on a company's own servers and within its own data center, rather than being hosted by a third-party cloud provider.  
 **Relation to APIs**: When discussing APIs, "on-premise" signifies that the API's underlying application and data reside within the company's private infrastructure. This contrasts with cloud-based APIs, where the service is hosted and managed by a cloud provider.  
 **Implications**: On-premise deployments offer greater control over data security and compliance but require significant upfront investment in hardware, software licenses, and ongoing maintenance by the organization.  
+</details>
