@@ -165,6 +165,7 @@ A query language and API style where the client defines exactly what data it wan
   -  All requests go to a single endpoint.
   -  Eliminates over-fetching or under-fetching of data.
   -  Supports nested queries and real-time subscriptions.
+
 **Use cases:** ✔ Rich front-ends with complex data needs ✔ Mobile apps where bandwidth and performance matter
 
 WebHooks
@@ -174,6 +175,7 @@ A server-to-client push mechanism — the server calls your system when certain 
   -  Triggered automatically by an event (like payment success).
   -  The server sends data to your callback URL (HTTP POST).
   -  Saves you from constantly polling for updates.
+
 **Use cases:** ✔ Payment gateways (Stripe, Razorpay) ✔ GitHub notifications ✔ Form submission alerts
 
 WebSockets
@@ -182,6 +184,7 @@ A persistent two-way connection between client and server.
 **Key features:**
   -  Keeps a channel open so both parties can send messages anytime.
   -  Great for low-latency real-time communication.
+
 **Use cases:** ✔ Chat apps ✔ Live multiplayer games ✔ Streaming dashboards or stock tickers
 
 WebRTC (Web Real-Time Communication)
@@ -190,6 +193,7 @@ A protocol for peer-to-peer real-time audio, video, and data exchange directly b
 **Key features:**
   -  Bypasses central servers for media/data transfer.
   -  Handles connection setup, NAT traversal, and quality management.
+
 **Use cases:** ✔ Video calls (e.g., Zoom, Meet) ✔ Screen sharing ✔ Real-time data exchange
 
 On-Premise (Premise)
