@@ -513,14 +513,13 @@ Security controls
   -  Quota limits
   -  No sensitive operations
 
-| Scenario         | API Key in Frontend? | Correct Approach |
-| ---------------- | -------------------- | ---------------- |
-| Angular app      | ❌ No               | BFF              |
-| Maps / Analytics | ⚠️ Yes              | Public key       |
-| File uploads     | ⚠️ Temporary        | Ephemeral tokens |
-| User auth        | ❌ Never            | OAuth            |
-| Internal APIs    | ❌ No               | JWT / mTLS       |
-
+| Scenario            | Use API Key in Frontend?  |
+| ------------------- | ------------------------- |
+| Angular user auth   | ❌ No                     |
+| Public map SDK      | ✅ Yes (restricted)       |
+| Weather API         | ❌ No                     |
+| Backend integration | ✅ Yes                    |
+| Webhooks            | ✅ Yes (backend)          |
 
 Basic Authentication
 --------------------------------------------------------------
