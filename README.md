@@ -1,6 +1,21 @@
 # API-Tutorials
 
 <details>
+<summary><strong>REST + WebSocket + Webhook</strong></summary>
+
+| Diagram Section      | Technology         | Why               |
+| -------------------- | ------------------ | ----------------- |
+| Frontend → Backend   | **REST / GraphQL** | User actions      |
+| Live search / status | **WebSocket**      | Real-time         |
+| Payment sync         | **Webhook**        | External async    |
+| Backend → Backend    | **REST / gRPC**    | Internal services |
+| Affiliate tracking   | **Webhook**        | Event-driven      |
+| Public APIs          | **REST / GraphQL** | Open consumption  |
+
+
+</details>
+
+<details>
 <summary><strong>APIs Explained with Real Use Cases</strong></summary>
 
 <img src="https://github.com/piyalidas10/API-AWS-Tutorials/blob/9088d78ab6145a1c99641f0002b8cae10ce0ffe4/img/API_Realtime.png" width="700" />
@@ -33,9 +48,21 @@ Login  Bank   Feed   Login/Profile  Payment    CRUD ops  Booking Tracking Sharin
 Fetch  Govt   Stats  Live search    Stock upd  Reports   Gateway Clicks  Health
 ```
 
+**🎯 Real System Design Mapping**
+```
+Angular App
+ ├── REST → login, create order
+ ├── WebSocket → live status, notifications
+ └── GraphQL → dashboard data
 
+Backend
+ ├── REST → internal services
+ ├── Webhook → payment, partner events
+ └── Event Bus → Kafka / Redis
 
-
+Partners
+ └── Webhook → async callbacks
+```
 </details>
 
 <details>
