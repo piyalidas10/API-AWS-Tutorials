@@ -1,6 +1,183 @@
 # API-Tutorials
 
 <details>
+<summary><strong>Design a Real-Time order tracking system (e-commerce / food delivery / trading app)</strong></summary>
+
+I use REST for transactional commands, WebSockets for pushing state changes to the UI, and Webhooks to ingest asynchronous external events. Internally, I decouple everything using an event bus so each component can scale independently.
+
+**Requirements**
+  -  User places an order
+  -  Order status updates in real time
+  -  External systems (payment, logistics) notify asynchronously
+  -  UI updates instantly without refresh
+  -  System must scale
+```
+┌──────────┐     REST      ┌────────────┐
+│ Angular  │─────────────▶│ API Gateway │
+│  App     │               └─────┬──────┘
+│          │  WebSocket          │ REST
+│          │◀──────────────────▶│
+└────┬─────┘                     ▼
+     │                      ┌────────────┐
+     │                      │ Order Svc  │
+     │                      └─────┬──────┘
+     │                            │
+     │        Webhook             ▼
+     │◀────────────────────┌────────────┐
+     │                     │ Payment    │
+     │                     │ Gateway    │
+     │                     └────────────┘
+```
+1️⃣ Order Creation → REST
+--------------------------------------------------------------
+**Why REST?**
+  -  One-time request
+  -  Reliable
+  -  Easy retries
+
+**Flow** : Angular → POST /orders → Order Service
+
+Angular
+```
+placeOrder(order: Order) {
+  return this.http.post('/api/orders', order);
+}
+```
+
+Backend
+```
+POST /orders
+→ validate
+→ save DB
+→ return orderId
+```
+> 📌 Interview line : “REST is ideal for transactional, request-response actions like order creation.”
+
+2️⃣ Live Order Status → WebSocket
+--------------------------------------------------------------
+**Why WebSocket?**
+  -  Server needs to push updates
+  -  Polling is inefficient
+  -  Real-time UX
+
+**Connection** : Angular ↔ WebSocket Server
+
+Angular
+```
+const socket$ = webSocket('wss://api/orders');
+
+socket$.subscribe(msg => {
+  if (msg.orderId === currentOrderId) {
+    this.orderStatus.set(msg.status);
+  }
+});
+```
+
+Backend
+```
+onOrderStatusChange(orderId, status) {
+  wsServer.broadcast({
+    orderId,
+    status
+  });
+}
+```
+> 📌 Interview line : “WebSockets maintain a persistent channel for server-driven updates.”
+
+3️⃣ Payment Confirmation → Webhook
+--------------------------------------------------------------
+**Why Webhook?**
+  -  External systems control the event
+  -  Async & event-driven
+  -  No polling
+
+Flow : Payment Gateway → POST /webhook/payment
+
+Backend Webhook
+```
+POST /webhook/payment
+→ verify signature
+→ update order status
+→ publish event
+```
+
+Trigger WebSocket
+```
+eventBus.emit('ORDER_PAID', orderId);
+```
+> 📌 Interview line : “Webhooks decouple external systems and enable reliable async communication.”
+
+4️⃣ Event Propagation (Internal)
+--------------------------------------------------------------
+```
+Webhook
+  ↓
+Order Service
+  ↓
+Event Bus (Kafka / RabbitMQ)
+  ↓
+WebSocket Gateway
+  ↓
+Angular UI
+```
+**📌 Why Event Bus?**
+  -  Loose coupling
+  -  Scalability
+  -  Retry & durability
+
+🔐 Security Design (Very Important)
+--------------------------------------------------------------
+**REST**
+  -  OAuth2 / JWT
+  -  CSRF protection
+  -  Rate limiting
+
+**WebSocket**
+  -  Token in handshake
+```
+new WebSocket('wss://api/orders?token=JWT');
+```
+  -  Auth check on connect
+
+**Webhook**
+  -  Signature validation
+```
+verifyHmac(req.body, signature);
+```
+  -  IP allowlist
+> 📌 Interview line : “Each channel uses a security mechanism appropriate to its communication model.”
+
+⚡ Scaling Considerations
+--------------------------------------------------------------
+**WebSocket Scaling**
+Problem: Users connected to different servers
+Solution: Redis Pub/Sub or Kafka
+```
+Order Service → Kafka → WS Server A/B/C
+```
+REST Scaling : Stateless services, Load balancer, Auto-scaling
+Webhook Reliability : Idempotency keys, Retry handling, Dead-letter queue
+
+| Requirement       | Technology | Reason            |
+| ----------------- | ---------- | ----------------- |
+| Create order      | REST       | Reliable & simple |
+| Real-time updates | WebSocket  | Push-based        |
+| External events   | Webhook    | Async & decoupled |
+| Internal sync     | Event Bus  | Scalable          |
+> “REST handles commands, WebSockets handle state changes, Webhooks handle external events.”
+
+**🧪 Failure Scenarios (Interview Favorite)**
+  -  ❌ WebSocket disconnect
+  -  ✔ Fallback to REST polling
+  -  ❌ Duplicate webhook
+  -  ✔ Idempotency check
+  -  ❌ Event bus down
+  -  ✔ Persist events → retry later
+
+
+</details>
+
+<details>
 <summary><strong>API Security</strong></summary>
 [![API Security Explained: Rate Limiting, CORS, SQL Injection, CSRF, XSS & More]](https://www.youtube.com/watch?v=FsB_nRGdeLs)
 
@@ -131,6 +308,13 @@ There are three different types of API consumers. 1) The first type of consumer 
 Based on these three different API consumer types, there are three different types of APIs. 1) The **private or the internal APIs** are used only by the development teams within the provider's organization. 2) The **public or the external APIs** are meant to be consumed by the public domain application developers. These public domain application developers consume the APIs from their applications and websites. 3) **Partner APIs** are used only by the trusted partners of the provider's organization. 
 
 One important point to note is that there is no difference in terms of the implementation of the API for these three types. The difference is in how these APIs are managed.
+
+**🎯 System-Design Decision Rule**
+  -  Angular UI → REST / GraphQL
+  -  Backend-to-Backend → gRPC
+  -  Live UI updates → WebSockets
+  -  Async notifications → Webhooks
+  -  Video / Audio → WebRTC
 
 ## SOAP vs REST vs On-Premise (on-prem)
 SOAP (Simple Object Access Protocol) and REST (Representational State Transfer) are two distinct approaches for building web services that enable communication between different systems.
