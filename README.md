@@ -3,6 +3,36 @@
 <details>
 <summary><strong>Design a Real-Time order tracking system (e-commerce / food delivery / trading app)</strong></summary>
 
+<img src="https://github.com/piyalidas10/API-AWS-Tutorials/blob/9088d78ab6145a1c99641f0002b8cae10ce0ffe4/img/API_Realtime.png" width="700" />
+**🎯 Whiteboard-friendly version**
+```
+                              ┌─────────────┐
+                              │     API     │
+                              └─────┬───────┘
+                                    │
+        ┌───────────────────────────┼───────────────────────────┐
+        │                           │                           │
+   ┌────▼────┐                 ┌────▼────┐                 ┌────▼────┐
+   │ Open API│                 │Internal │                 │Partner  │
+   │ (Public)│                 │  API    │                 │  API    │
+   └────┬────┘                 └────┬────┘                 └────┬────┘
+        │                           │                           │
+ ┌──────┼────────┐        ┌─────────┼──────────┐       ┌────────┼────────┐
+ │      │        │        │         │          │       │        │        │
+REST  SOAP   GraphQL  Frontend→BE  Backend→BE  Service→DB  B2B  Affiliate Data
+ │      │        │        │         │          │       │        │        │
+Login  Bank   Feed   Login/Profile  Payment    CRUD ops  Booking Tracking Sharing
+Fetch  Govt   Stats  Live search    Stock upd  Reports   Gateway Clicks  Health
+```
+
+
+
+
+</details>
+
+<details>
+<summary><strong>Design a Real-Time order tracking system (e-commerce / food delivery / trading app)</strong></summary>
+
 I use REST for transactional commands, WebSockets for pushing state changes to the UI, and Webhooks to ingest asynchronous external events. Internally, I decouple everything using an event bus so each component can scale independently.
 
 **Requirements**
