@@ -453,8 +453,75 @@ The term "on-premise" (or "on-premise deployment") refers to software or infrast
 </details>
 
 <details>
-<summary><strong>Authentication Explained: When to Use Basic, Bearer, OAuth2, JWT & SSO</strong></summary>
-  
+<summary><strong>Authentication : When to Use API Keys, Basic, Bearer, OAuth2, JWT & SSO</strong></summary>
+
+API Keys
+--------------------------------------------------------------
+API keys must never be embedded directly in frontend code (Angular/React/Vue).   
+If an API key is in: environment.ts, JS bundle, Network request headers then 👉 It is already compromised.
+```
+// ❌ DO NOT DO THIS
+this.http.get(
+  'https://api.thirdparty.com/data',
+  { headers: { 'x-api-key': 'abc123' } }
+);
+```
+**✅ CORRECT PATTERN**  
+```
+Angular App
+ → Your Backend (OAuth/JWT)
+ → Third-Party API (API Key)
+```
+Flow
+  -  Angular authenticates user (OAuth/JWT)
+  -  Angular calls your backend
+  -  Backend attaches API key
+  -  Backend returns response
+
+Angular code (safe)
+```
+this.http.get('/api/weather');
+```
+Backend code (Node example)
+```
+fetch('https://weather.api.com', {
+  headers: { 'x-api-key': process.env.WEATHER_API_KEY }
+});
+```
+> API keys should be shielded behind a BFF.
+
+**Public API Keys (Allowed but Limited)**  
+Some APIs intentionally allow frontend usage.
+Examples
+  -  Google Maps JS API
+  -  Firebase config
+  -  Analytics SDKs
+Why this is allowed
+  -  Keys are domain-restricted
+  -  Read-only
+  -  Rate-limited
+  -  Monitored
+
+Example (Angular)
+```
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=PUBLIC_KEY">
+</script>
+```
+Security controls
+  -  Domain allow-list
+  -  Quota limits
+  -  No sensitive operations
+
+| Scenario         | API Key in Frontend? | Correct Approach |
+| ---------------- | -------------------- | ---------------- |
+| Angular app      | ❌ No               | BFF              |
+| Maps / Analytics | ⚠️ Yes              | Public key       |
+| File uploads     | ⚠️ Temporary        | Ephemeral tokens |
+| User auth        | ❌ Never            | OAuth            |
+| Internal APIs    | ❌ No               | JWT / mTLS       |
+
+
 Basic Authentication
 --------------------------------------------------------------
   -  Sends username:password encoded in Base64 with each request.
