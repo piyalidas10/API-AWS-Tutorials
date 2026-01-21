@@ -1,9 +1,17 @@
 # API-Tutorials
 
 <details>
-<summary><strong>Design a Real-Time order tracking system (e-commerce / food delivery / trading app)</strong></summary>
+<summary><strong>APIs Explained with Real Use Cases</strong></summary>
 
 <img src="https://github.com/piyalidas10/API-AWS-Tutorials/blob/9088d78ab6145a1c99641f0002b8cae10ce0ffe4/img/API_Realtime.png" width="700" />
+
+I classify APIs based on who consumes them: Open APIs, Internal APIs, and Partner APIs.  
+  -  Open APIs : Open APIs include REST, SOAP, and GraphQL. REST is used for most public use cases, GraphQL for data-heavy UIs, and SOAP for legacy or regulated systems like banking.
+  -  Internal APIs : Internal APIs are split into frontend-to-backend, backend-to-backend, and service-to-database. Angular only interacts with frontend APIs using REST, GraphQL, or WebSockets. Backend-to-backend communication is hidden and often uses REST or gRPC.
+  -  Partner APIs : Partner APIs handle B2B, affiliate, and data-sharing use cases. These rely heavily on REST and Webhooks for asynchronous event-driven communication.
+  -  Real-time & Security : For real-time updates, WebSockets are used. For external async events like payments, Webhooks are used. Each API type is secured differently — JWT for frontend, mTLS for services, and signatures for webhooks.
+  -  REST handles commands, WebSockets handle live state, and Webhooks handle external events — all classified by consumer trust boundaries.
+
 **🎯 Whiteboard-friendly version**
 ```
                               ┌─────────────┐
