@@ -1,5 +1,7 @@
 # API Gateway
 
+<img src="img/api_gateway.gif" width="80%" />
+
 An API Gateway is a server that acts as an API front-end, receiving API requests, enforcing throttling and security policies, passing requests to the back-end service, and then passing the response back to the requester. 
 
 It acts as an intermediary layer between clients and microservices to simplify the architecture, enhance security, and streamline API management.
