@@ -71,6 +71,128 @@ To verify internal BI triggering, teams commonly use:
 - Analytics dashboards
 - Reporting systems
 
+</details>
+
+<details>
+<summary><strong>Why companies use an EM service as middleware ?</strong></summary>
+
+**1. Security Isolation**
+
+BI platforms often expose:
+- sensitive datasets
+- analytics APIs
+- enterprise credentials
+- tenant-level access
+
+If frontend directly calls BI:
+- API keys may leak
+- tokens may be exposed
+- row-level security becomes harder
+- users may bypass restrictions
+
+EM service:
+- stores secrets securely
+- validates JWT/session
+- applies RBAC/ABAC
+- generates scoped access tokens
+
+**2. Centralized Business Logic**
+
+BI services only provide analytics/data.
+
+But enterprise apps usually need:
+- custom filtering
+- role-based transformations
+- aggregation rules
+- audit logging
+- feature toggles
+- tenant mapping
+
+EM service handles:
+```
+user → permissions → dataset mapping → BI query
+```
+instead of exposing raw BI APIs.
+
+3. Multi-source Orchestration
+
+Often data comes from:
+- BI service
+- SQL DB
+- CRM
+- HRMS
+- vector DB
+- AI service
+
+EM service can combine all:
+```
+Frontend
+   ↓
+EM Service
+   ├── BI Service
+   ├── PostgreSQL
+   ├── AI Engine
+   └── Redis Cache
+```
+Frontend gets one unified response.
+
+4. Performance & Caching
+
+BI queries can be expensive and slow.
+
+EM service can:
+- cache reports
+- precompute analytics
+- throttle requests
+- batch queries
+- reduce BI API cost
+
+Without middleware:
+- every user hits BI directly
+- higher latency
+- higher licensing/API cost
+
+5. Vendor Independence
+
+If frontend directly depends on BI APIs:
+- changing BI vendor becomes difficult
+
+Example:
+- today: Power BI
+- tomorrow: Tableau
+- later: Looker
+
+With EM layer:
+```
+Frontend remains unchanged
+```
+Only middleware integration changes.
+
+6. Better Audit & Monitoring
+
+EM service can log:
+- who viewed what
+- report usage
+- failed requests
+- suspicious activity
+- analytics tracking
+
+This is critical in enterprise systems.
+
+**When direct BI calls ARE acceptable**
+
+Direct frontend → BI works for:
+- internal dashboards
+- small teams
+- prototypes
+- trusted users
+- embedded analytics
+- low-security apps
+
+Example:
+```
+embedding Power BI dashboard directly in Angular
+```
 
 </details>
 
