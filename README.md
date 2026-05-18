@@ -1,6 +1,80 @@
 # API-Tutorials
 
 <details>
+<summary><strong>EM (Enterprise Management / Event Management) service</strong></summary>
+
+EM service is likely an Enterprise Management / Event Management service that acts as an orchestrator, and it internally triggers BI services (Business Intelligence services).
+
+Typical flow:
+```
+Frontend/UI
+    ↓
+EM Service
+    ↓
+BI Services
+    ↓
+Database / Analytics Engine
+```
+The frontend does NOT directly call BI. EM acts as the mediator/orchestrator layer.
+
+EM Service
+- Main backend service
+- Receives requests from UI or other systems
+- Validates auth/session
+- Applies business rules
+- Calls downstream services
+
+BI Services
+- Business Intelligence / Reporting services
+- Generate reports, analytics, dashboards
+- Fetch aggregated data
+- Process KPIs/metrics
+
+Example scenario:
+1. User clicks “Generate Sales Report”
+2. Frontend calls EM service
+3. EM service validates request
+4. EM service internally triggers BI service
+5. BI service generates analytics/report
+6. Response returns to UI
+
+**When testing in Fiddler:**
+
+You usually see:
+- Request from UI → EM service
+- EM service response
+
+But:
+- Internal EM → BI calls may NOT appear in Fiddler unless:
+  - traffic passes through proxy
+  - service logs are enabled
+  - distributed tracing is configured
+To verify internal BI triggering, teams commonly use:
+- Application logs
+- Correlation IDs
+- Kibana/Grafana
+- Splunk
+- Jaeger/Zipkin tracing
+- API gateway logs
+
+**Example technical stack:**
+- EM service → Java Spring Boot / .NET / Node.js
+- BI service → Reporting engine, analytics microservice, ETL APIs
+- Communication → REST, gRPC, Kafka, RabbitMQ
+
+
+**In enterprise systems, this architecture is very common in:**
+- Banking
+- Telecom
+- Insurance
+- ERP platforms
+- Analytics dashboards
+- Reporting systems
+
+
+</details>
+
+<details>
 <summary><strong>REST + WebSocket + Webhook</strong></summary>
 
 | Diagram Section      | Technology         | Why               |
