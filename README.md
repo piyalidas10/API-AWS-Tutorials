@@ -1,5 +1,14 @@
 # API-Tutorials
 
+The four main types of APIs, categorized by access and usage, are Public APIs (open to anyone), Private/Internal APIs (for internal use), Partner APIs (shared with specific businesses), and Composite APIs (combining multiple services). These differ from API architectures like REST, SOAP, GraphQL, which define how they communicate. 
+
+Here's a breakdown of the access types:
++ Public APIs (Open APIs): Available for general developers to build integrations, like weather or map APIs, encouraging broad innovation.
++ Private APIs (Internal APIs): Used within a company for different internal systems to communicate, improving efficiency and data flow.
++ Partner APIs: Offered to a limited group of business partners for specific collaborations, sharing data or functionality.
++ Composite APIs: Combine multiple APIs into a single endpoint, simplifying complex operations by fetching data from several sources at once. 
+
+
 <details>
 <summary><strong>EM (Enterprise Management / Event Management) service</strong></summary>
 
