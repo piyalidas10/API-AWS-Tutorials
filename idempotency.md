@@ -23,6 +23,8 @@ Content-Type: application/json
 2. https://medium.com/@reetesh043/rest-api-design-what-is-idempotency-18218e1ff73c
 3. https://blog.bytebytego.com/p/mastering-idempotency-building-reliable
 
+<img src="img/Idempotency in payment APIs.png" width="100%" />
+
 ## 🚀 "The customer clicked 'Pay' three times. How do you ensure they're charged only once?"
 
 This is one of the most common backend and system design interview questions.
