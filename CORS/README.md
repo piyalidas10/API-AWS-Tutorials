@@ -66,6 +66,19 @@ Browsers send it automatically before cross-origin requests with custom headers 
 
 ### When can you see OPTIONS preflight?
 
+|      # | Scenario                                                                                                     | Preflight (`OPTIONS`)?              |
+| -----: | ------------------------------------------------------------------------------------------------------------ | ----------------------------------- |
+|  **1** | Cross-origin request with `Authorization` header                                                             | **Yes**                             |
+|  **2** | Cross-origin `POST/PUT/PATCH/DELETE` request                                                                 | **Usually Yes**                     |
+|  **3** | Cross-origin `POST` with `Content-Type: application/json`                                                    | **Yes**                             |
+|  **4** | Cross-origin request with custom/non-safelisted headers, e.g. `X-API-Key`                                    | **Yes**                             |
+|  **5** | Cross-origin request using non-simple methods or headers + credentials requirements                          | **Yes, when CORS rules require it** |
+|  **6** | Cross-origin request where the preflight result is not cached                                                | **Yes**                             |
+|  **7** | Same-origin request (same protocol + host + port)                                                            | **No**                              |
+|  **8** | Cross-origin simple `GET` with safelisted headers                                                            | **No**                              |
+|  **9** | Cross-origin simple `POST` using `application/x-www-form-urlencoded`, `multipart/form-data`, or `text/plain` | **No**                              |
+| **10** | Cross-origin request whose compatible preflight permission is already cached                                 | **Usually No**                      |
+
 #### 1. Different HTTP method — PUT, PATCH, DELETE
 ```
 DELETE /users/123
