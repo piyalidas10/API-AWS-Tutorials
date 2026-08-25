@@ -233,7 +233,8 @@ https://api.example.com
               OPTIONS → DELETE    ← Preflight
 ```
 
-```graph TD
+```mermaid
+graph TD
     Start([Browser Request]):::startEnd
 
     Cross{Cross-Origin?}:::question
