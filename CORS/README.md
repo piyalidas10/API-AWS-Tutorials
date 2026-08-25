@@ -233,44 +233,39 @@ https://api.example.com
               OPTIONS → DELETE    ← Preflight
 ```
 
-```mermaid
-graph TD
-    %% Define Styles
-    classDef startEnd fill:#F1F5F9,stroke:#64748B,stroke-width:2px,color:#0F172A;
-    classDef question fill:#EFF6FF,stroke:#2563EB,stroke-width:2px,color:#1E40AF;
+```graph TD
+    Start([Browser Request]):::startEnd
+
+    Cross{Cross-Origin?}:::question
+    NoCors[Send Request Directly]:::process
+
+    Simple{CORS-Safelisted Request?}:::question
+    Direct[Send Actual Request]:::action
+
+    Preflight[Send OPTIONS Preflight]:::action
+    Check{Server Allows Request?}:::question
+
+    Actual[Send Actual Request]:::action
+    Block[Browser Blocks Request]:::process
+
+    Start --> Cross
+
+    Cross -- NO --> NoCors
+    Cross -- YES --> Simple
+
+    Simple -- YES --> Direct
+    Simple -- NO --> Preflight
+
+    Preflight --> Check
+
+    Check -- YES --> Actual
+    Check -- NO --> Block
+
+    classDef startEnd fill:#F1F5F9,stroke:#64748B,stroke-width:2px,color:#0F172A,font-weight:bold;
+    classDef question fill:#EFF6FF,stroke:#2563EB,stroke-width:2px,color:#1E40AF,font-weight:bold;
     classDef process fill:#F0FDF4,stroke:#16A34A,stroke-width:2px,color:#14532D;
     classDef action fill:#FFFBEB,stroke:#D97706,stroke-width:2px,color:#78350F;
-
-    %% Nodes
-    Start([Incoming Request]) :::startEnd
-    IsCross[Is request Cross-Origin?] :::question
-    NoCORS[No CORS needed] :::process
-    IsSimple[Is request simple?] :::question
-    DirectReq[Direct Actual Request] :::action
-    OptionsReq[OPTIONS Preflight Request] :::action
-    CorsCheck{CORS Check Passes?} :::question
-    ActualReq[Actual Request] :::action
-    Block[Request Blocked by Browser] :::process
-
-    %% Connections
-    Start --> IsCross
-    
-    IsCross -- NO --> NoCORS
-    IsCross -- YES --> IsSimple
-    
-    IsSimple -- YES --> DirectReq
-    IsSimple -- NO --> OptionsReq
-    
-    OptionsReq --> CorsCheck
-    
-    CorsCheck -- YES --> ActualReq
-    CorsCheck -- NO --> Block
-
-    %% Click/Interactive Note
-    style Start font-weight:bold
-    style IsCross font-weight:bold
-    style IsSimple font-weight:bold
-    ```
+```
 
 ### The one sentence to remember
 ```
