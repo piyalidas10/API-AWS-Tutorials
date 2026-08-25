@@ -233,7 +233,8 @@ https://api.example.com
               OPTIONS → DELETE    ← Preflight
 ```
 
-mermaidgraph TD
+```mermaid
+graph TD
     %% Define Styles
     classDef startEnd fill:#F1F5F9,stroke:#64748B,stroke-width:2px,color:#0F172A;
     classDef question fill:#EFF6FF,stroke:#2563EB,stroke-width:2px,color:#1E40AF;
@@ -269,6 +270,7 @@ mermaidgraph TD
     style Start font-weight:bold
     style IsCross font-weight:bold
     style IsSimple font-weight:bold
+    ```
 
 ### The one sentence to remember
 ```
